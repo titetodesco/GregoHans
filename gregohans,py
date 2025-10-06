@@ -47,3 +47,4 @@ if uploaded_file is not None:
             st.error("As colunas 'Location' e/ou 'Risk Area' não foram encontradas na planilha.")
 else:
     st.info("Faça o upload de uma planilha para começar.")
+
