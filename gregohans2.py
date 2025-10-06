@@ -24,12 +24,13 @@ if uploaded_file is not None:
             df_filtered = df[required_cols].dropna()
 
             # Tabs para separar visualizações
-            tab1, tab2, tab3, tab4, tab5 = st.tabs([
+            tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
                 "🔥 Heatmap por Location",
                 "📌 Tipo de Evento",
                 "🧯 Severidade (RAM Potential)",
                 "🛠️ Tarefas / Atividades",
-                "⚠️ Consequências"
+                "⚠️ Consequências",
+                "💥 Severidade vs Risk Area"
             ])
 
             # === Tab 1: Heatmap Location vs Risk Area ===
@@ -92,6 +93,21 @@ if uploaded_file is not None:
                 ax.set_xlabel("Ocorrências")
                 ax.set_ylabel("Consequências")
                 st.pyplot(fig)
+
+            # === Tab 6: RAM Potential vs Risk Area ===
+            with tab6:
+                st.subheader("Correlação entre Severidade (RAM Potential) e Risk Area")
+
+                correlation_data = pd.crosstab(df_filtered['RAM Potential'], df_filtered['Risk Area'])
+
+                if correlation_data.empty:
+                    st.warning("Não há dados suficientes para gerar a correlação.")
+                else:
+                    fig, ax = plt.subplots(figsize=(14, 6))
+                    sns.heatmap(correlation_data, annot=True, fmt="d", cmap="Blues", linewidths=0.5, ax=ax)
+                    plt.xticks(rotation=45, ha='right')
+                    plt.yticks(rotation=0)
+                    st.pyplot(fig)
 
         else:
             st.error(f"A planilha deve conter as colunas: {', '.join(required_cols)}")
