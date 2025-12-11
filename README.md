@@ -2,7 +2,7 @@
 
 Interactive Streamlit dashboard for offshore safety data analysis.
 
-🔗 **Live Demo:** https://gregohans.streamlit.app/
+🔗 **Live Demo:** https://gregohans2.streamlit.app/
 
 ## Features
 
